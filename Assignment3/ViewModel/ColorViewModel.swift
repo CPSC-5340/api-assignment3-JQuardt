@@ -10,7 +10,7 @@ import Foundation
 class ColorViewModel : ObservableObject {
     
     var hex : String = "#ffa500"
-    @Published var artData = [ArtModel]()
+    @Published private(set) var artData = [ArtModel]()
     @Published var hasError = false
     @Published var error : ArtModelError?
     private let url = "https://api.europeana.eu/record/v2/search.json?query=*&reusability=open&media=true&thumbnail=true&landingpage=true&wskey=orkalpaunch&colourpalette=#000000"

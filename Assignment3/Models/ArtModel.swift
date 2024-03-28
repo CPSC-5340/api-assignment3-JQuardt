@@ -23,3 +23,33 @@ struct ArtModel : Codable, Identifiable {
     let link : String
     let title : [String]
 }
+
+//struct ArtModel : Codable, Identifiable {
+//    let country : [CountryModel]
+//    let dataProvider : [DataProviderModel]
+//    let dcCreator : [DCCreatorModel]
+//    let dcDescription : [DCDescriptionModel]
+//    let id : String
+//    let link : String
+//    let title : [TitleModel]
+//}
+
+//struct CountryModel : Codable {
+//    let country : String
+//}
+//
+//struct DataProviderModel : Codable {
+//    let dataProviderStr : String
+//}
+//
+//struct DCCreatorModel : Codable {
+//    let dcCreatorStr : String
+//}
+//
+//struct DCDescriptionModel : Codable {
+//    let dcDescriptionStr : String
+//}
+//
+//struct TitleModel : Codable {
+//    let titleStr : String
+//}
