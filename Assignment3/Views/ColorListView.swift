@@ -16,20 +16,13 @@ struct ColorListView: View {
                 ForEach(colors.colorModel) { c in
                     NavigationLink {
                         ImageGridView(hex: c.hex)
-                        //ParkDetail(park: park)
                     } label: {
                         Text(c.name)
                     }
                 }
             }
-//            .task {
-//                await parksvm.fetchData()
-//            }
             .listStyle(.grouped)
             .navigationTitle("Pick a Color")
-//            .alert(isPresented: $parksvm.hasError, error: parksvm.error) {
-//                Text("")
-//            }
         }
     }
 }

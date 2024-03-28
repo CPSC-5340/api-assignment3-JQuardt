@@ -12,7 +12,7 @@ struct ColorModel : Codable, Identifiable {
         return UUID()
     }
     var colorModel : Array<Color> = [
-        Color("red", "#000000"),
+        Color("red", "#ff0000"),
         Color("orange", "#ffa500"),
         Color("yellow", "#ffff00"),
         Color("yellow green", "#9acd32"),

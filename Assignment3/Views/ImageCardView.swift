@@ -12,9 +12,10 @@ struct ImageCardView: View {
     var body: some View {
             AsyncImage(url: URL(string: url)) { image in
                 image.resizable()
-                    .scaledToFit()
-                    .cornerRadius(10)
-                    .frame(width: 150, height: 150)
+                    .scaledToFill()
+                    //.cornerRadius(10)
+                    .frame(width: 130, height: 130)
+                    .padding()
             } placeholder: {
                 ProgressView()
             }

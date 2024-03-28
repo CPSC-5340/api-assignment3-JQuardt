@@ -9,20 +9,20 @@ import SwiftUI
 
 struct ImageGridView: View {
     
-    var hex: String = "#ffa500"
+    var hex : String
     @ObservedObject var colorvm = ColorViewModel()
     
     var body: some View {
         ScrollView {
-            LazyHGrid(rows: [GridItem()]) {
+            LazyVGrid(columns: [GridItem(.adaptive(minimum: 150))], content: {
                 ForEach(colorvm.artData) { i in
-                    Text("Hello")
-//                    ImageCardView(url: "https://www.wikihow.com/images/thumb/f/fc/Get-the-URL-for-Pictures-Step-1-Version-6.jpg/v4-460px-Get-the-URL-for-Pictures-Step-1-Version-6.jpg.webp")
+                    ImageCardView(url: i.edmPreview[0])
                 }
-//                ImageCardView(url: "https://www.wikihow.com/images/thumb/f/fc/Get-the-URL-for-Pictures-Step-1-Version-6.jpg/v4-460px-Get-the-URL-for-Pictures-Step-1-Version-6.jpg.webp")
-            }
+            })
         }
                 .task {
+                    colorvm.updateURL(hexa: hex)
+                    print(colorvm.url)
                 await colorvm.fetchData()
             }
                 .alert(isPresented: $colorvm.hasError, error: colorvm.error) {

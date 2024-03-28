@@ -9,11 +9,11 @@ import Foundation
 
 class ColorViewModel : ObservableObject {
     
-    var hex : String = "#ffa500"
+    @Published var hex : String = "#000000"
     @Published private(set) var artData = [ArtModel]()
     @Published var hasError = false
     @Published var error : ArtModelError?
-    private let url = "https://api.europeana.eu/record/v2/search.json?query=*&reusability=open&media=true&thumbnail=true&landingpage=true&wskey=orkalpaunch&colourpalette=#000000"
+    var url = "https://api.europeana.eu/record/v2/search.json?query=*&reusability=open&media=true&thumbnail=true&landingpage=true&wskey=orkalpaunch&sort=random+asc&rows=12&colourpalette=#9acd32"
     
     @MainActor
     func fetchData() async {
@@ -27,10 +27,16 @@ class ColorViewModel : ObservableObject {
                 }
                 self.artData = results.items
             } catch {
+                print(error)
                 self.hasError.toggle()
                 self.error = ArtModelError.customError(error: error)
             }
         }
+    }
+    
+    func updateURL(hexa: String) {
+        self.url = "https://api.europeana.eu/record/v2/search.json?query=*&reusability=open&media=true&thumbnail=true&landingpage=true&wskey=orkalpaunch&sort=random+asc&rows=12&colourpalette=" + hexa
+        self.hex = hexa
     }
 }
 
