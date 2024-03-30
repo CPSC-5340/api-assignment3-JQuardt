@@ -7,14 +7,14 @@
 
 import Foundation
 
-struct ArtResults : Codable {
-    let success : Bool
-    let itemsCount : Int
-    let totalResults : Int
-    let items : [ArtModel]
+struct ApiResults : Codable {
+    let numFound : Int
+    let start : Int
+    let numFoundExact : Bool
+    let docs : [AuthorModel]
 }
 
-struct ArtModel : Codable, Identifiable {
+struct AuthorModel : Codable, Identifiable {
     let country : [String]
     let dataProvider : [String]
     let dcCreator : [String]?

@@ -7,16 +7,23 @@
 
 import SwiftUI
 
-struct ImageGridView: View {
+struct AuthorDetailView: View {
     
     var hex : String
-    @ObservedObject var colorvm = ColorViewModel()
+    @ObservedObject var colorvm = BookViewModel()
     
     var body: some View {
         ScrollView {
             LazyVGrid(columns: [GridItem(.adaptive(minimum: 150))], content: {
                 ForEach(colorvm.artData) { i in
                     ImageCardView(url: i.edmPreview[0])
+                        .onTapGesture {
+//                            NavigationLink {
+//                                ColorListView()
+//                            } label: {
+//                                Text("Text")
+//                            }
+                        }
                 }
             })
         }
@@ -32,5 +39,5 @@ struct ImageGridView: View {
 }
 
 #Preview {
-    ImageGridView(hex: "#ffa500")
+    AuthorDetailView(hex: "#ffa500")
 }

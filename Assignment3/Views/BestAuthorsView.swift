@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct ColorListView: View {
+struct BestAuthorsView: View {
     var colors = ColorModel()
     var body: some View {
         NavigationStack {
@@ -29,6 +29,6 @@ struct ColorListView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ColorListView()
+        BestAuthorsView()
     }
 }

@@ -7,13 +7,13 @@
 
 import Foundation
 
-class ColorViewModel : ObservableObject {
+class BookViewModel : ObservableObject {
     
-    @Published var hex : String = "#000000"
+    @Published var hex : String = "#9acd32"
     @Published private(set) var artData = [ArtModel]()
     @Published var hasError = false
     @Published var error : ArtModelError?
-    var url = "https://api.europeana.eu/record/v2/search.json?query=*&reusability=open&media=true&thumbnail=true&landingpage=true&wskey=orkalpaunch&sort=random+asc&rows=12&colourpalette=#9acd32"
+    var url = "https://api.europeana.eu/record/v2/search.json?query=*&reusability=open&media=true&thumbnail=true&landingpage=true&wskey=orkalpaunch&sort=random&rows=12&languageCodes=en&colourpalette=#9acd32"
     
     @MainActor
     func fetchData() async {
@@ -35,12 +35,12 @@ class ColorViewModel : ObservableObject {
     }
     
     func updateURL(hexa: String) {
-        self.url = "https://api.europeana.eu/record/v2/search.json?query=*&reusability=open&media=true&thumbnail=true&landingpage=true&wskey=orkalpaunch&sort=random+asc&rows=12&colourpalette=" + hexa
+        self.url = "https://api.europeana.eu/record/v2/search.json?query=*&reusability=open&media=true&thumbnail=true&landingpage=true&wskey=orkalpaunch&sort=random&rows=12&languageCodes=en&colourpalette=" + hexa
         self.hex = hexa
     }
 }
 
-extension ColorViewModel {
+extension BookViewModel {
     enum ArtModelError : LocalizedError {
         case decodeError
         case customError(error: Error)
