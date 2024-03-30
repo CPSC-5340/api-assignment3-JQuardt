@@ -19,7 +19,7 @@ struct AuthorDetailView: View {
             Text("Book Title: \(author.title)")
             Text("Year First Published: \(author.first_publish_year)")
             Text("Number of Pages: \(author.number_of_pages_median)")
-            //Text("First Sentence: \n\(author.first_sentence)")
+            Text("First Sentence: \n\(author.first_sentence?[0] ?? "")")
             Text("Average Reader Rating: \(author.ratings_average)")
         }
     }

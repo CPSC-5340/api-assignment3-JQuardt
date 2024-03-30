@@ -21,14 +21,14 @@ struct BestAuthorsView: View {
                     }
                 }
             }
-            .task {
-                await booksvm.fetchData()
-            }
+            
             .listStyle(.grouped)
             .navigationTitle("Best Authors")
-            .alert(isPresented: $booksvm.hasError, error: booksvm.error) {
-                Text("")
-            }
+            
+        }.task {
+            await booksvm.fetchData()
+        }.alert(isPresented: $booksvm.hasError, error: booksvm.error) {
+            Text("")
         }
     }
 }

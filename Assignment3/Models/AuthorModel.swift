@@ -18,7 +18,7 @@ struct AuthorModel : Codable, Identifiable {
     let id = UUID()
     let author_name : [String]
     let first_publish_year : Int
-    //let first_sentence : [String]
+    let first_sentence : [String]?
     let number_of_pages_median : Int
     let publish_date : [String]
     let title : String
