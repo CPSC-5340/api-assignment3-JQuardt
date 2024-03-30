@@ -9,35 +9,23 @@ import SwiftUI
 
 struct AuthorDetailView: View {
     
-    var hex : String
-    @ObservedObject var colorvm = BookViewModel()
+    var author : AuthorModel
     
     var body: some View {
         ScrollView {
-            LazyVGrid(columns: [GridItem(.adaptive(minimum: 150))], content: {
-                ForEach(colorvm.artData) { i in
-                    ImageCardView(url: i.edmPreview[0])
-                        .onTapGesture {
-//                            NavigationLink {
-//                                ColorListView()
-//                            } label: {
-//                                Text("Text")
-//                            }
-                        }
-                }
-            })
-        }
-                .task {
-                    colorvm.updateURL(hexa: hex)
-                    print(colorvm.url)
-                await colorvm.fetchData()
+            VStack(alignment: .leading, spacing: 10) {
+                Text("\(author.author_name[0])")
+                    .font(.system(size: 20))
+                    .bold()
+                    .padding(.horizontal)
+                Spacer()
+                Text("Book Title: \(author.title)")
+                Text("Year First Published: \(author.first_publish_year)")
+                Text("Number of Pages: \(author.number_of_pages_median)")
+                //Text("First Sentence: \n\(author.first_sentence)")
+                Text("Average Reader Rating: \(author.ratings_average)")
             }
-                .alert(isPresented: $colorvm.hasError, error: colorvm.error) {
-                    Text("")
-                }
-    }
-}
+        }
 
-#Preview {
-    AuthorDetailView(hex: "#ffa500")
+    }
 }

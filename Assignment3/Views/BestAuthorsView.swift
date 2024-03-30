@@ -4,25 +4,31 @@
 // Copyright © 2023 Auburn University.
 // All Rights Reserved.
 
-//https://www.w3.org/TR/css-color-3/#svg-color
-
 import SwiftUI
 
 struct BestAuthorsView: View {
-    var colors = ColorModel()
+    
+    @ObservedObject var booksvm = BookViewModel()
+
     var body: some View {
         NavigationStack {
             List {
-                ForEach(colors.colorModel) { c in
+                ForEach(booksvm.authorData) { author in
                     NavigationLink {
-                        ImageGridView(hex: c.hex)
+                        AuthorDetailView(author: author)
                     } label: {
-                        Text(c.name)
+                        Text("\(author.author_name[0])")
                     }
                 }
             }
+            .task {
+                await booksvm.fetchData()
+            }
             .listStyle(.grouped)
-            .navigationTitle("Pick a Color")
+            .navigationTitle("Best Authors")
+            .alert(isPresented: $booksvm.hasError, error: booksvm.error) {
+                Text("")
+            }
         }
     }
 }

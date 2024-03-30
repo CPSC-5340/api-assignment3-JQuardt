@@ -15,12 +15,12 @@ struct ApiResults : Codable {
 }
 
 struct AuthorModel : Codable, Identifiable {
-    let country : [String]
-    let dataProvider : [String]
-    let dcCreator : [String]?
-    let dcDescription : [String]?
-    let edmPreview : [String]
-    let id : String
-    let link : String
-    let title : [String]
+    let id = UUID()
+    let author_name : [String]
+    let first_publish_year : Int
+    //let first_sentence : [String]
+    let number_of_pages_median : Int
+    let publish_date : [String]
+    let title : String
+    let ratings_average : Double
 }

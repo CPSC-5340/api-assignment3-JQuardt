@@ -9,39 +9,33 @@ import Foundation
 
 class BookViewModel : ObservableObject {
     
-    @Published var hex : String = "#9acd32"
-    @Published private(set) var artData = [ArtModel]()
+    @Published private(set) var authorData = [AuthorModel]()
     @Published var hasError = false
-    @Published var error : ArtModelError?
-    var url = "https://api.europeana.eu/record/v2/search.json?query=*&reusability=open&media=true&thumbnail=true&landingpage=true&wskey=orkalpaunch&sort=random&rows=12&languageCodes=en&colourpalette=#9acd32"
+    @Published var error : BookModelError?
+    private var url = "https://openlibrary.org/search.json?q=best+authors&limit=13"
     
     @MainActor
     func fetchData() async {
         if let url = URL(string: self.url) {
             do {
                 let (data, _) = try await URLSession.shared.data(from: url)
-                guard let results = try JSONDecoder().decode(ArtResults?.self, from: data) else {
+                guard let results = try JSONDecoder().decode(ApiResults?.self, from: data) else {
                     self.hasError.toggle()
-                    self.error = ArtModelError.decodeError
+                    self.error = BookModelError.decodeError
                     return
                 }
-                self.artData = results.items
+                self.authorData = results.docs
             } catch {
                 print(error)
                 self.hasError.toggle()
-                self.error = ArtModelError.customError(error: error)
+                self.error = BookModelError.customError(error: error)
             }
         }
-    }
-    
-    func updateURL(hexa: String) {
-        self.url = "https://api.europeana.eu/record/v2/search.json?query=*&reusability=open&media=true&thumbnail=true&landingpage=true&wskey=orkalpaunch&sort=random&rows=12&languageCodes=en&colourpalette=" + hexa
-        self.hex = hexa
     }
 }
 
 extension BookViewModel {
-    enum ArtModelError : LocalizedError {
+    enum BookModelError : LocalizedError {
         case decodeError
         case customError(error: Error)
         
